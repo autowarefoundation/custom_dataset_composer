@@ -1,0 +1,71 @@
+# Populate dataset names here:
+datasets: ['waymo', 'bdd100k', 'kitti']
+
+universal_classes:
+  - 0: 'vehicle'
+  - 1: 'pedestrian'
+  - 2: 'cyclist'
+  - 3: 'traffic sign'
+  - 4: 'traffic light'
+  - 5: 'car'
+  - 6: 'rider'
+  - 7: 'truck'
+  - 8: 'bus'
+  - 9: 'motor'
+  - 10: 'train'
+  - 11: 'bike'
+  - 12: "don't care"
+  - 13: 'tram'
+  - 14: 'person sitting'
+  - 15: 'van'
+  - 16: 'misc'
+
+
+# Note that: Right side label ids represent universal_classes
+
+# Currently, support train and validation set
+waymo:
+ - map_waymo_id_to_universal_id:
+     - vehicle: 0 # Waymo Open Dataset Labels: cars, and big vehicles like trucks, buses, etc.
+     - pedestrian: 1
+     - cyclist: 2
+ - path_folder_tfrecord: '/home/zeys/projects/perception2d/2d_detection/datasets/waymo/all_train_seg'
+ - camera_ids: [1, 2, 3 , 4, 5] # There are 5 cameras in the Waymo Open Dataset
+
+
+# Currently, support train and validation set
+bdd100k:
+ - map_bdd100k_id_to_universal_id:
+     - car: 0 # set to vehicle
+     - bus: 0 # set to vehicle
+     - person: 1 # pedestrian
+     - bike: 11
+     - truck: 0 # set to vehicle
+     - motor: 9
+     - train: 10
+     - rider: 6
+     - traffic sign: 3
+     - traffic light: 4
+
+ - path_file_train_json: '/home/zeys/Downloads/bdd100k_labels_release/bdd100k/labels/bdd100k_labels_images_train.json'
+ - path_file_val_json: '/home/zeys/Downloads/bdd100k_labels_release/bdd100k/labels/bdd100k_labels_images_val.json'
+ - path_folder_images_train: '/home/zeys/Downloads/bdd100k_images_100k/bdd100k/images/100k/train'
+ - path_folder_images_val: '/home/zeys/Downloads/bdd100k_images_100k/bdd100k/images/100k/val'
+
+
+kitti:
+  - map_kitti_id_to_universal_id:
+    - don't care: 12
+    - person sitting: 1 # set to pedestrian
+    - truck: 0 # set to vehicle
+    - tram: 13
+    - cyclist: 2
+    - car: 0 # set to vehicle
+    - pedestrian: 1
+    - van: 0 # set to vehicle
+    - misc: 16
+  - path_folder_training_images: '/home/zeys/Downloads/data_object_image_2/training/image_2'
+  - path_folder_training_labels: '/home/zeys/Downloads/data_object_label_2/training/label_2'
+
+train_set_ratio: 0.8
+count_max_process: 10
